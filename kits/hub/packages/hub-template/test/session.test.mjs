@@ -63,7 +63,7 @@ test("a tampered cookie is no session", async () => {
         `${v}.${expires}`,
         `${v}.${Number(expires) + 1}.${signature}`,
         `v2.${expires}.${signature}`,
-        `${v}.${expires}.${signature.slice(0, -2)}AA`,
+        `${v}.${expires}.${signature[0] === "A" ? "B" : "A"}${signature.slice(1)}`,
         `${v}.${expires}.not base64!`,
         `${v}.abc.${signature}`,
     ]) {
