@@ -4,6 +4,7 @@
    im scoped <style>-Block in slides.md. Vue scoped sonst `:root` mit der
    Komponenten-ID, dann matchen die Variablen nirgends (in Slidev 52 strikter
    als in 0.49). */
+@import './cd-tokens.generated.css';
 @import './theme.css';
 @import './fonts.css';
 @import './code.css';

@@ -60,12 +60,12 @@ const accentVar = 'var(--miragon-accent)'
 // #00E676 erreicht dort nur 1.67:1 und scheidet damit aus (CI: Grün nur als
 // Fläche oder Grafik-Akzent). Die grün/blau-Semantik trägt deshalb die farbige
 // Markierungsleiste (leftMark/rightMark), der Titel nimmt einen AA-tauglichen
-// Ton: links das Marken-Blau (5.47:1), rechts die Statusfarbe für den
-// Lösungs-/Ziel-Zustand (5.34:1).
+// Ton: links das Marken-Blau (5.47:1), rechts die Textrolle des Erfolgs-Status,
+// hell die Textfarbe, dunkel Grün.
 const twoTone = computed(() => props.accent !== 'blue' && props.accent !== 'green')
-const monoTone = computed(() => (props.accent === 'green' ? 'var(--miragon-success)' : 'var(--miragon-accent-blue)'))
+const monoTone = computed(() => (props.accent === 'green' ? 'var(--miragon-success-text)' : 'var(--miragon-accent-blue)'))
 const leftTone = computed(() => (twoTone.value ? 'var(--miragon-accent-blue)' : monoTone.value))
-const rightTone = computed(() => (twoTone.value ? 'var(--miragon-success)' : monoTone.value))
+const rightTone = computed(() => (twoTone.value ? 'var(--miragon-success-text)' : monoTone.value))
 const leftMark = computed(() => (twoTone.value || props.accent === 'blue' ? 'var(--miragon-gradient-blue)' : 'var(--miragon-gradient-green)'))
 const rightMark = computed(() => (twoTone.value || props.accent === 'green' ? 'var(--miragon-gradient-green)' : 'var(--miragon-gradient-blue)'))
 </script>

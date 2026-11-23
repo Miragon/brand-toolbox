@@ -68,11 +68,12 @@ const toneClass = computed(() => {
 .mg-card--accent-green-deep,
 .mg-card--accent-green-mid,
 .mg-card--accent-green { --mg-card-accent: var(--miragon-card-accent-blue-mid); }
-/* Status replaces the accent when a card delivers a verdict. The three status
-   tokens are all AA as text on white (5.3:1 and up). */
-.mg-card--status-success { --mg-card-accent: var(--miragon-success); }
-.mg-card--status-warning { --mg-card-accent: var(--miragon-warning); }
-.mg-card--status-danger { --mg-card-accent: var(--miragon-danger); }
+/* Status replaces the accent when a card delivers a verdict. The icon takes the
+   status colour, the title the matching text role: in light mode success and
+   warning are too light for text, so their title stays in the text colour. */
+.mg-card--status-success { --mg-card-accent: var(--miragon-success); --mg-card-title: var(--miragon-success-text); }
+.mg-card--status-warning { --mg-card-accent: var(--miragon-warning); --mg-card-title: var(--miragon-warning-text); }
+.mg-card--status-danger { --mg-card-accent: var(--miragon-danger); --mg-card-title: var(--miragon-danger-text); }
 
 .mg-card__icon {
   display: block;
@@ -93,7 +94,7 @@ const toneClass = computed(() => {
   font-weight: 700;
   font-size: 1.05rem;
   line-height: 1.2;
-  color: var(--mg-card-accent);
+  color: var(--mg-card-title, var(--mg-card-accent));
 }
 .mg-card__body {
   margin-top: 0.5rem;

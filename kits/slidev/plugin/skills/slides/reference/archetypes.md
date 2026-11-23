@@ -2,7 +2,7 @@
 
 The theme ships **17 layouts**, each with one clear purpose. Selected per slide via `layout:` in the frontmatter. The `.vue` file in `packages/toolkit/layouts/` is the truth for each prop signature; this is a summary. Every demo slide in `deck/chapter/*/*.md` carries a `REQUIRED` / `OPTIONAL` / `LIMIT` / `HOW TO USE` comment block; match it.
 
-`accent` is `blue` (default) · `green` · `mixed` unless noted. It tints the **gradient accent bar and the bullet markers**, never the type: the text accent (eyebrow, bold word) is always the brand blue `#335DE5`, because green `#00E676` reaches 1.67:1 on a light ground and fails WCAG AA. So `accent: green` buys a green bar, not green words. The one text tone that is not brand blue is the `compare` right panel title, which takes the success status colour `#0B7A55` when `accent` is `mixed` or `green` (see that archetype).
+`accent` is `blue` (default) · `green` · `mixed` unless noted. It tints the **gradient accent bar and the bullet markers**, never the type: the text accent (eyebrow, bold word) is always the brand blue `#335DE5`, because green `#00E676` reaches 1.67:1 on a light ground and fails WCAG AA. So `accent: green` buys a green bar, not green words. The one text tone that is not brand blue is the `compare` right panel title when `accent` is `mixed` or `green`: it takes the success text role, the primary text colour in light mode and green in dark mode, while the green marker bar carries the colour (see that archetype).
 
 ---
 
@@ -145,8 +145,8 @@ The panel tones follow `accent`, so pick it deliberately (verified against `pack
 | `accent` | Left title / marker | Right title / marker |
 |---|---|---|
 | `blue` (**default**) | blue `#335DE5` / blue gradient | blue `#335DE5` / blue gradient |
-| `mixed` | blue `#335DE5` / blue gradient | success `#0B7A55` / green gradient |
-| `green` | success `#0B7A55` / green gradient | success `#0B7A55` / green gradient |
+| `mixed` | blue `#335DE5` / blue gradient | primary text `#1D1D1D` / green gradient |
+| `green` | primary text `#1D1D1D` / green gradient | primary text `#1D1D1D` / green gradient |
 
 Use **`accent: mixed`** when the slide really is problem-versus-solution: that is the only value that gives the two sides different tones. The default `blue` renders both sides identically, which is right for a neutral A/B comparison but carries no verdict.
 

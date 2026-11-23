@@ -7,7 +7,7 @@
  *
  * Verwendung: liegt als unterste Ebene (z-index 0) in den animierten
  * Layouts (cover, closing). pointer-events:none, damit Klicks durchgehen.
- * Fallback-Navy #0d0d2b für den ersten Frame / kein WebGL.
+ * Fallback-Schwarz #1D1D1D für den ersten Frame / kein WebGL.
  */
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useNav } from '@slidev/client'
@@ -20,10 +20,11 @@ import {
 } from '@paper-design/shaders'
 
 // --- Heilige Markenparameter (DO NOT CHANGE) -------------------------------
-const COLORS = ['#335DE5', '#1a1a4e', '#00E676', '#335DE5', '#0d0d2b', '#00C853']
+const COLORS = ['#335DE5', '#1D1D1D', '#00E676', '#335DE5', '#1D1D1D', '#00E676']
 const DISTORTION = 1      // Verformung der Farbfelder
 const SWIRL = 0.5         // Verwirbelung der Übergänge
-const SPEED = 0.6         // Animationsgeschwindigkeit
+const SPEED = 0.4         // Animationsgeschwindigkeit
+const OFFSET_X = 0.08     // Versatz nach rechts (tokens.json gradient.mesh-hero)
 // ---------------------------------------------------------------------------
 
 const host = ref<HTMLDivElement | null>(null)
@@ -45,7 +46,7 @@ onMounted(() => {
       u_fit: ShaderFitOptions[defaultObjectSizing.fit],
       u_rotation: defaultObjectSizing.rotation,
       u_scale: defaultObjectSizing.scale,
-      u_offsetX: defaultObjectSizing.offsetX,
+      u_offsetX: OFFSET_X,
       u_offsetY: defaultObjectSizing.offsetY,
       u_originX: defaultObjectSizing.originX,
       u_originY: defaultObjectSizing.originY,
@@ -101,7 +102,7 @@ onBeforeUnmount(() => {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: #0d0d2b; /* Navy-Basis für allerersten Frame */
+  background: #1D1D1D; /* CI-Schwarz als Basis für den allerersten Frame */
   pointer-events: none;
   z-index: 0;
   overflow: hidden; /* hält den überdimensionierten Fallback-Layer im Rahmen */
@@ -128,8 +129,8 @@ onBeforeUnmount(() => {
   background:
     radial-gradient(38% 38% at 24% 30%, #335DE5 0%, transparent 60%),
     radial-gradient(34% 34% at 76% 22%, #00E676 0%, transparent 60%),
-    radial-gradient(44% 44% at 70% 76%, #00C853 0%, transparent 60%),
-    radial-gradient(40% 40% at 28% 80%, #1a1a4e 0%, transparent 62%),
+    radial-gradient(44% 44% at 70% 76%, #00E676 0%, transparent 60%),
+    radial-gradient(40% 40% at 28% 80%, #1D1D1D 0%, transparent 62%),
     radial-gradient(55% 55% at 50% 50%, #335DE5 0%, transparent 72%);
   filter: blur(48px);
   will-change: transform;

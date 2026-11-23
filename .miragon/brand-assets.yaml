@@ -6,3 +6,5 @@ skillVersion: 1.33.0
 files:
   - source: skills/docs-site/assets/cd-tokens.docs.generated.css
     out: kits/docs/packages/docs-starter/theme/cd-tokens.generated.css
+  - source: skills/corporate-design/assets/cd-tokens.generated.css
+    out: kits/slidev/packages/toolkit/styles/cd-tokens.generated.css

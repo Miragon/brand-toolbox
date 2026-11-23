@@ -3,7 +3,7 @@
  * Slidev renders a Markdown ```lang fence to <pre class="slidev-code shiki …">.
  * By default that is a bare, unframed block. Here we give every fence the same
  * white-card treatment the <Card> component uses (white background, thin grey
- * border, soft blue brand shadow, rounded corners) so code reads as part of the
+ * border, soft brand shadow, rounded corners) so code reads as part of the
  * design system. Font is already Geist Mono via --slidev-code-font-family
  * (index.css). Colours come from theme.css — no hardcoded hex except the shared
  * border/scrollbar neutrals already used across the toolkit.
