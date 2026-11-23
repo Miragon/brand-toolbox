@@ -41,8 +41,9 @@ const STYLE = `<style>
     --border: color-mix(in srgb, #1D1D1D 14%, #FFFFFF);
     --bg-soft: #F9F7F7;
     --card: #FFFFFF;
-    --error-bg: color-mix(in srgb, #C92A2A 10%, #FFFFFF);
-    --error-fg: #C92A2A;
+    --error-bg: #FBEEF0;
+    --error-fg: #1D1D1D;
+    --error-border: #CD1839;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -52,8 +53,9 @@ const STYLE = `<style>
       --border: #464646;
       --bg-soft: #1D1D1D;
       --card: #282828;
-      --error-bg: color-mix(in srgb, #C92A2A 24%, #1D1D1D);
+      --error-bg: #282828;
       --error-fg: #FB6D73;
+      --error-border: #FB6D73;
     }
   }
   * { box-sizing: border-box; }
@@ -128,6 +130,7 @@ const STYLE = `<style>
     line-height: 1.5;
     color: var(--error-fg);
     background: var(--error-bg);
+    border: 1px solid var(--error-border);
     border-radius: 10px;
     padding: 12px 14px;
     margin: 0 0 20px;
