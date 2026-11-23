@@ -290,7 +290,7 @@ function goTo(no: number) {
   inset: 0;
   z-index: 1900;
   pointer-events: none;
-  border: 4px solid rgba(255, 107, 107, 0.85);
+  border: 4px solid rgba(205, 24, 57, 0.85);
 }
 
 .sp-off-badge {
@@ -300,8 +300,8 @@ function goTo(no: number) {
   padding: 0.2rem 0.6rem;
   font: 700 0.7rem/1.4 ui-sans-serif, system-ui, sans-serif;
   letter-spacing: 0.16em;
-  color: #fff;
-  background: rgba(255, 107, 107, 0.92);
+  color: #FFFFFF;
+  background: rgba(205, 24, 57, 0.92);
 }
 
 .sp-cluster {
@@ -319,8 +319,8 @@ function goTo(no: number) {
   gap: 0.45rem;
   padding: 0.4rem 0.75rem;
   font: 0.78rem/1.2 ui-sans-serif, system-ui, sans-serif;
-  color: #f4f4f6;
-  background: rgba(20, 20, 28, 0.88);
+  color: #FFFFFF;
+  background: rgba(29, 29, 29, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
   cursor: pointer;
@@ -333,7 +333,7 @@ function goTo(no: number) {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 999px;
-  background: #ff6b6b;
+  background: #FB6D73;
 }
 
 .sp-chip-on .sp-chip-dot { background: #00e676; }
@@ -348,8 +348,8 @@ function goTo(no: number) {
   z-index: 2100;
   display: flex;
   flex-direction: column;
-  color: #ececf1;
-  background: rgba(14, 14, 20, 0.97);
+  color: #FFFFFF;
+  background: rgba(29, 29, 29, 0.97);
 }
 
 .sp-head {
@@ -365,8 +365,8 @@ function goTo(no: number) {
 .sp-actions { display: flex; align-items: center; gap: 0.5rem; }
 .sp-note { font-size: 0.75rem; opacity: 0.75; }
 .sp-ok { color: #00e676; }
-.sp-err { color: #ff6b6b; max-width: 22rem; }
-.sp-warn { color: #ffd479; }
+.sp-err { color: #FB6D73; max-width: 22rem; }
+.sp-warn { color: #FFB000; }
 
 .sp-btn {
   padding: 0.35rem 0.8rem;
@@ -383,9 +383,9 @@ function goTo(no: number) {
 .sp-drift {
   padding: 0.55rem 1.2rem;
   font-size: 0.78rem;
-  color: #ffd479;
-  background: rgba(255, 212, 121, 0.09);
-  border-bottom: 1px solid rgba(255, 212, 121, 0.2);
+  color: #FFB000;
+  background: rgba(255, 176, 0, 0.09);
+  border-bottom: 1px solid rgba(255, 176, 0, 0.2);
 }
 
 .sp-drift-head {
@@ -423,9 +423,9 @@ function goTo(no: number) {
   max-width: 26rem;
   padding: 0.6rem 2.2rem 0.6rem 0.9rem;
   font: 0.78rem/1.45 ui-sans-serif, system-ui, sans-serif;
-  color: #f4f4f6;
-  background: rgba(20, 20, 28, 0.9);
-  border: 1px solid rgba(255, 212, 121, 0.35);
+  color: #FFFFFF;
+  background: rgba(29, 29, 29, 0.9);
+  border: 1px solid rgba(255, 176, 0, 0.35);
   border-radius: 0.5rem;
 }
 
