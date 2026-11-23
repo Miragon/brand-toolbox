@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://github.com/Miragon/brand-toolbox/compare/miragon-slidev-plugin-v2.1.2...miragon-slidev-plugin-v2.2.0) (2026-11-23)
+
+
+### Features
+
+* **toolkit:** add a dark mode with diagrams that follow it ([#286](https://github.com/Miragon/brand-toolbox/issues/286)) ([6e63bac](https://github.com/Miragon/brand-toolbox/commit/6e63bac063cfa59b60a08635993286e35ae30fa1))
+
+
+### Bug Fixes
+
+* **slidev-toolkit:** take brand colours from the generated tokens.json export ([#317](https://github.com/Miragon/brand-toolbox/issues/317)) ([22fea64](https://github.com/Miragon/brand-toolbox/commit/22fea6484ed7081f57f5dc6cd6cb810eb9f8ead4)), closes [#315](https://github.com/Miragon/brand-toolbox/issues/315)
+
 ## [2.1.2](https://github.com/Miragon/brand-toolbox/compare/miragon-slidev-plugin-v2.1.1...miragon-slidev-plugin-v2.1.2) (2026-11-19)
 
 
