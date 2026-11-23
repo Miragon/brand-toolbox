@@ -3,7 +3,7 @@
  * A Markdown table (`| a | b |`) is plain markdown, so it needs no component and
  * keeps the slide source clean (it passes the no-raw-html check). This file gives
  * every rendered `<table>` the same white-card treatment the <Card> component and
- * code fences use: white surface, thin grey border, soft blue brand shadow,
+ * code fences use: white surface, thin grey border, soft brand shadow,
  * rounded corners. Header text stays BLACK (the heading rule); the single
  * restrained accent is the blue rule under the header row. Body text is Geist
  * Mono, matching the "Geist Mono for code and tables" CI invariant.

@@ -222,7 +222,7 @@ export function findColorKeywords(line) {
 
 /**
  * The allowed colours for one repo-relative file: the palette, plus any
- * restricted set this file is explicitly allowlisted for (the mesh-hero stops).
+ * restricted set this file is explicitly allowlisted for.
  * Returns Map<'#rrggbb', label>.
  */
 export function allowedFor(relPath) {

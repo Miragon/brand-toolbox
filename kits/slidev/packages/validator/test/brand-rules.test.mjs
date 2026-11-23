@@ -69,7 +69,7 @@ test('palette: the sanctioned values pass, in every notation', () => {
     '.g { color: rgba(29, 29, 29, 0.06); }',
     '.h { color: #2B50D4; }',
     '.i { color: #6B8AFF; }',
-    '.j { color: #0B7A55; border: 1px solid #92610A; outline-color: #C92A2A; }',
+    '.j { color: #CD1839; border: 1px solid #FFB000; outline-color: #FB6D73; }',
   ].join('\n')
   assert.deepEqual(findOffPaletteColors(src, CSS), [])
 })
@@ -179,18 +179,15 @@ test('palette: blanking keeps line and column positions intact', () => {
   assert.equal(findOffPaletteColors(src, CSS)[0].column, 14)
 })
 
-// --- brand-palette: the mesh-hero allowlist ---------------------------------
+// --- brand-palette: the mesh-hero stops -------------------------------------
 
-test('palette: the mesh-hero stops are allowed only in the shader and the theme tokens', () => {
-  const mesh = "const COLORS = ['#335DE5', '#1a1a4e', '#00E676', '#335DE5', '#0d0d2b', '#00C853']"
-  assert.deepEqual(findOffPaletteColors(mesh, 'packages/toolkit/components/BrandMeshBackground.vue'), [])
-  assert.deepEqual(findOffPaletteColors('--miragon-mesh-navy: #0D0D2B;', THEME), [])
-  assert.deepEqual(findOffPaletteColors('--x: #0D0D2B;', CSS).map((h) => h.hex), ['#0d0d2b'])
-  // The same value anywhere else is a foreign hue.
-  const hits = findOffPaletteColors('.bg { background: #00C853; }', 'packages/toolkit/layouts/cover.vue')
-  assert.deepEqual(hits.map((h) => h.hex), ['#00c853'])
-  assert.ok(!allowedFor('packages/toolkit/layouts/cover.vue').has('#00c853'))
-  assert.ok(allowedFor('packages/toolkit/components/BrandMeshBackground.vue').has('#00c853'))
+test('palette: the mesh-hero stops are palette values, the retired ones fail even in the shader', () => {
+  const shader = 'packages/toolkit/components/BrandMeshBackground.vue'
+  const mesh = "const COLORS = ['#335DE5', '#1D1D1D', '#00E676', '#335DE5', '#1D1D1D', '#00E676']"
+  assert.deepEqual(findOffPaletteColors(mesh, shader), [])
+  const retired = "const COLORS = ['#335DE5', '#1a1a4e', '#00E676', '#335DE5', '#0d0d2b', '#00C853']"
+  assert.deepEqual(findOffPaletteColors(retired, shader).map((h) => h.hex), ['#1a1a4e', '#0d0d2b', '#00c853'])
+  assert.ok(!allowedFor(shader).has('#00c853'))
 })
 
 // --- brand-palette: parsing helpers -----------------------------------------

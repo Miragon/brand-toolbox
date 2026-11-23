@@ -36,7 +36,7 @@ The canonical card (surface background: white in light mode, the dark surface in
 |---|---|---|---|
 | `title` (str) | free text | none | card title (gets the accent colour) |
 | `accent` | `blue` · `blue-mid` | `blue` (or the group tone, see below) | the two sanctioned stops (`#335DE5` / `#2B50D4`, both AA on white). `teal` · `green-deep` · `green-mid` · `green` are **deprecated aliases** that render as `blue-mid`; accepted so older decks keep working, never written in new slides |
-| `status` | `success` · `warning` · `danger` | none | optional verdict: colours the title and the icon with the status token (`--miragon-success` / `--miragon-warning` / `--miragon-danger`, all AA on white) and **wins over `accent`**. The card stays white. See "Status" below |
+| `status` | `success` · `warning` · `danger` | none | optional verdict: colours the icon with the status token (`--miragon-success` / `--miragon-warning` / `--miragon-danger`) and the title with its text role (`--miragon-*-text`: the primary text colour in light mode, the status colour in dark mode), and **wins over `accent`**. The card stays white. See "Status" below |
 | `padding` | `compact` · `standard` · `generous` | `standard` | 16 / 20 / 24 px |
 | `icon` (str) | a **Lucide** Iconify UnoCSS class, e.g. `i-lucide-grid-3x3`, `i-lucide-box` | none | optional icon shown above the title in the accent colour; omit for a plain text card |
 | `image` (str) | path to a portrait or logo, e.g. `/resources/<chapter>/fowler.jpg` | none | optional picture above the title **instead of** `icon` (wins when both are set), `2.5rem` circle. See "Image" below |
@@ -50,7 +50,7 @@ Accent by card count, alternating the two stops left → right: **2** → blue, 
 
 **Inside a group: the group's tone.** A card that sets neither `accent` nor `status` takes the tone of the group it sits in, read from `--mg-group-tone`. Today the only group is a `compare` column with `variant: groups` (see the archetype), so a card there colours its title and icon like its group heading. Everywhere else the variable is unset and the card stays blue. An explicit `accent` or `status` still wins; never reach for `status` to make cards match a group.
 
-**Status: a verdict, not a variety.** Leave `status` off by default; blue is the card colour. Set it only where a slide delivers a judgement the audience should read at a glance: `success` (works, solved, recommended), `warning` (works with a caveat), `danger` (does not work, avoid, a bad practice). The brand keeps status colours strictly for states, so never use them to make a grid more colourful, and do not mix status cards with decorative accents on the same verdict. **Colour never carries the state alone:** name it with a word in the body ("Solved.", "Avoid.") or with an icon that says the same thing (`i-lucide-circle-check`, `i-lucide-triangle-alert`, `i-lucide-circle-x`). Only the title and the icon take the status colour; the card, its border, and the body markers stay as they are.
+**Status: a verdict, not a variety.** Leave `status` off by default; blue is the card colour. Set it only where a slide delivers a judgement the audience should read at a glance: `success` (works, solved, recommended), `warning` (works with a caveat), `danger` (does not work, avoid, a bad practice). The brand keeps status colours strictly for states, so never use them to make a grid more colourful, and do not mix status cards with decorative accents on the same verdict. **Colour never carries the state alone:** name it with a word in the body ("Solved.", "Avoid.") or with an icon that says the same thing (`i-lucide-circle-check`, `i-lucide-triangle-alert`, `i-lucide-circle-x`). Only the icon takes the status colour, and in dark mode the title; the card, its border, and the body markers stay as they are.
 
 ```md
 <Card title="Timing" status="success" icon="i-lucide-timer">Solved. The engine never runs ahead of our data.</Card>
@@ -175,7 +175,7 @@ Because `steps` registers its clicks on the slide, `v-click="1"` … `v-click="n
 
 ## DiagramFrame
 
-The branded card as a standalone container: surface background (white in light mode), subtle border, rounded corners (1.1rem), soft blue shadow, contents centred. It is the **single source of that surface**: the `bpmn` / `dmn` / `mermaid` / `excalidraw` diagram layouts all frame their diagram by using this component internally (their `.*-canvas` class now only sets the flex-fill), so the card lives in one place. Exposed as a component so you can also frame **part** of a slide (e.g. one `SplitView` column) rather than a whole one. Reach for it when a visual needs that white card but a `Card` is wrong (a `Card` is for text, with a title and a title-accent; `DiagramFrame` has neither and just frames a nested visual). Nest anything inside: a `Figure`, an image, a ` ```mermaid ` fence.
+The branded card as a standalone container: surface background (white in light mode), subtle border, rounded corners (1.1rem), soft shadow, contents centred. It is the **single source of that surface**: the `bpmn` / `dmn` / `mermaid` / `excalidraw` diagram layouts all frame their diagram by using this component internally (their `.*-canvas` class now only sets the flex-fill), so the card lives in one place. Exposed as a component so you can also frame **part** of a slide (e.g. one `SplitView` column) rather than a whole one. Reach for it when a visual needs that white card but a `Card` is wrong (a `Card` is for text, with a title and a title-accent; `DiagramFrame` has neither and just frames a nested visual). Nest anything inside: a `Figure`, an image, a ` ```mermaid ` fence.
 
 | Prop | Values | Default | Notes |
 |---|---|---|---|
@@ -320,13 +320,13 @@ class: agenda-slide
 
 The animated WebGL2 mesh-gradient shader behind the `cover` and `closing` slides. **Takes no props and is never written in a slide**: those two layouts mount it themselves as their bottom layer (`z-index: 0`, `pointer-events: none`), which is the whole reason they are the only animated archetypes. Listed here for completeness, not as something to reach for.
 
-Its colour stops and the DISTORTION / SWIRL / SPEED parameters are a **sacred brand invariant** (see "Sacred invariants" in [`SKILL.md`](../SKILL.md)): do not change them without brand sign-off. Without WebGL2 it falls back to navy `#0D0D2B`, so the cover never renders white.
+Its colour stops and the DISTORTION / SWIRL / SPEED / offsetX parameters are a **sacred brand invariant** (see "Sacred invariants" in [`SKILL.md`](../SKILL.md)): do not change them without brand sign-off. Without WebGL2 it falls back to the CI black `#1D1D1D`, so the cover never renders white.
 
 ---
 
 ## Tables (no component, plain Markdown)
 
-There is **no table component**, and you don't need one: a native Markdown table already renders in brand CI. The theme styles every `<table>` (in `packages/toolkit/styles/table.css`) as a white card, thin grey border, soft blue brand shadow, rounded corners, with a light-blue header band, a bold header row in CI black `#1D1D1D` (never `#000000`) over a blue accent rule, subtle zebra striping, and Geist Mono body text (the "Geist Mono for code and tables" rule). This keeps the slide source clean: a Markdown table is markdown, so it passes the no-raw-html check; a hand-rolled `<table>`/`<div>` grid would not.
+There is **no table component**, and you don't need one: a native Markdown table already renders in brand CI. The theme styles every `<table>` (in `packages/toolkit/styles/table.css`) as a white card, thin grey border, soft brand shadow, rounded corners, with a light-blue header band, a bold header row in CI black `#1D1D1D` (never `#000000`) over a blue accent rule, subtle zebra striping, and Geist Mono body text (the "Geist Mono for code and tables" rule). This keeps the slide source clean: a Markdown table is markdown, so it passes the no-raw-html check; a hand-rolled `<table>`/`<div>` grid would not.
 
 Write a plain Markdown table. Set column alignment with the divider row (`:---` left, `:--:` centre, `---:` right); right-align numeric columns. Keep it modest so it clears the canvas floor: aim for **<= 6 body rows** and short cells (see the overflow limits in `SKILL.md`). Inline `` `code` ``, `**bold**` and `*italic*` work in cells.
 

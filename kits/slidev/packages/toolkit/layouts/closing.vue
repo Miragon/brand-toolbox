@@ -22,7 +22,7 @@ defineProps<{
 // base-aware. Das Deck erbt das Logo aus dem Theme, ohne es selbst zu duplizieren.
 //
 // WEISSE Variante, nicht die grüne: dieses Layout liegt auf dem animierten
-// Mesh, dessen Farbstopps selbst Grün enthalten (#00E676, #00C853). Die grüne
+// Mesh, dessen Farbstopps selbst Grün enthalten (#00E676). Die grüne
 // Wortmarke stand dort stellenweise bei 1.55:1 gegen den Hintergrund. Die CI
 // schreibt für dunklen/farbigen Grund und Fotos ohnehin Weiß vor.
 // Die Datei ist der unveränderte offizielle Vektor (miragon-logo-weiss.svg).
@@ -92,7 +92,7 @@ function onLogoError(e: Event) {
   font-weight: 900;
   color: var(--miragon-on-colour);
   margin: 0;
-  text-shadow: 0 2px 24px color-mix(in srgb, var(--miragon-mesh-navy) 35%, transparent);
+  text-shadow: 0 2px 24px color-mix(in srgb, var(--miragon-black) 35%, transparent);
 }
 
 .closing-body :deep(p) {

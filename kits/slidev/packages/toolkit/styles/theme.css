@@ -2,19 +2,23 @@
  * Miragon Design Tokens. CI. DO NOT CHANGE brand colors.
  *
  * SOURCE OF TRUTH is the `miragon-brand` plugin, skill `corporate-design`,
- * file `assets/tokens.json`. This file MIRRORS those values for Slidev; where
- * the two disagree, tokens.json wins and this file gets pulled back in line.
- * The sanctioned palette is exactly:
+ * file `assets/tokens.json`. Its generated export `cd-tokens.generated.css`
+ * sits next to this file as an unchanged copy (listed in
+ * `.miragon/brand-assets.yaml` at the repo root, refreshed with the plugin's
+ * `brand-assets.mjs`, never edited by hand). This file maps the `--cd-*`
+ * tokens onto the `--miragon-*` names the layouts read. The palette is:
  *
- *   blau    #335DE5   primary: surfaces, buttons, links, accents
- *   gruen   #00E676   accent only: key visual, highlights, one word. Never
- *                     body text on white (1.67:1, fails WCAG AA).
- *   grau    #F9F7F7   quiet neutral surface
- *   schwarz #1D1D1D   text on light. NOT pure #000000: the brand excludes it.
- *   weiss   #FFFFFF   text on colour, surfaces
- *   derived #2B50D4 (blau-link, AA on white) and #6B8AFF (blau-hell, dark mode)
- *   status  #0B7A55 / #92610A / #C92A2A / #2B50D4: for STATES only, never as
- *           a design colour.
+ *   blau    --cd-blau     primary: surfaces, buttons, links, accents
+ *   gruen   --cd-gruen    accent only: key visual, highlights, one word. Never
+ *                         body text on white (1.67:1, fails WCAG AA).
+ *   grau    --cd-grau     quiet neutral surface
+ *   schwarz --cd-schwarz  text on light. NOT pure #000000: the brand excludes it.
+ *   weiss   --cd-weiss    text on colour, surfaces
+ *   derived --cd-blau-link (AA on white) and --cd-blau-hell (dark mode)
+ *   status  --cd-success / --cd-warning / --cd-danger: for STATES only, never
+ *           as a design colour. Success and warning are too light for text on
+ *           a light ground: there they mark icon, dot and bar, the word next
+ *           to them stays in the text colour.
  *
  * Everything else here is derived from those values with color-mix(), so no
  * foreign hue can enter through a hand-picked hex. If you need a new shade,
@@ -33,15 +37,15 @@
   --miragon-font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
   /* --- Markenfarben (CI), die fünf Palettenwerte, exakt -------------- */
-  --miragon-blue: #335DE5;          /* Primär */
-  --miragon-green: #00E676;         /* Akzent: sparsam, nie Text auf Weiß */
-  --miragon-gray-bg: #F9F7F7;
-  --miragon-black: #1D1D1D;         /* CI-Schwarz, kein reines #000000 */
-  --miragon-white: #FFFFFF;
+  --miragon-blue: var(--cd-blau);          /* Primär */
+  --miragon-green: var(--cd-gruen);         /* Akzent: sparsam, nie Text auf Weiß */
+  --miragon-gray-bg: var(--cd-grau);
+  --miragon-black: var(--cd-schwarz);         /* CI-Schwarz, kein reines #000000 */
+  --miragon-white: var(--cd-weiss);
 
   /* Abgeleitete Blaus aus tokens.json (die einzigen zwei sanktionierten). */
-  --miragon-blue-link: #2B50D4;     /* 6.56:1 auf Weiß: Links, Akzenttext */
-  --miragon-blue-bright: #6B8AFF;   /* Dark Mode / Text auf dunklem Grund */
+  --miragon-blue-link: var(--cd-blau-link);     /* 6.56:1 auf Weiß: Links, Akzenttext */
+  --miragon-blue-bright: var(--cd-blau-hell);   /* Dark Mode / Text auf dunklem Grund */
   /* Rückwärtskompatibler Alias: hieß früher "das kanonische Blau für Headings
      und Akzente" und trug denselben Wert wie --miragon-blue. Wird noch von
      code.css und CodeBlock.vue gelesen. */
@@ -62,20 +66,13 @@
   --miragon-gradient-mixed: linear-gradient(120deg, var(--miragon-blue) 30%, var(--miragon-green));
 
   /* --- Mesh-Hintergrund (cover / closing) ---------------------------- */
-  /* Die sechs Stops sind tokens.json gradient.mesh-hero. Sie liegen BEWUSST
-     außerhalb der Grundpalette und gelten ausschließlich für diesen Shader
-     (BrandMeshBackground.vue) und seinen CSS-Fallback. Nirgends sonst
-     verwenden. Als Token, damit der Fallback-Verlauf in cover.vue/closing.vue
-     die Werte nicht ein drittes Mal dupliziert. */
-  --miragon-mesh-navy: #0D0D2B;
-  --miragon-mesh-indigo: #1A1A4E;
-  --miragon-mesh-green-deep: #00C853;
+  /* CSS-Fallback für den Shader (BrandMeshBackground.vue), falls WebGL fehlt.
+     tokens.json gradient.mesh-hero hat nur Palettenwerte: Blau, Schwarz, Grün. */
   --miragon-mesh-fallback: linear-gradient(
     125deg,
     var(--miragon-blue) 0%,
-    var(--miragon-mesh-indigo) 35%,
-    var(--miragon-mesh-navy) 55%,
-    var(--miragon-mesh-green-deep) 100%
+    var(--miragon-black) 45%,
+    var(--miragon-green) 100%
   );
 
   /* --- Card accent ramp (Card title + icon) -------------------------- */
@@ -120,14 +117,19 @@ html.dark .mg-fixed-stage {
   --miragon-card-accent-blue: var(--miragon-blue);
   --miragon-card-accent-blue-mid: var(--miragon-blue-link);
   /* Statusfarben: nur Zustände, nie als Gestaltungsfarbe. */
-  --miragon-success: #0B7A55;
-  --miragon-warning: #92610A;
-  --miragon-danger: #C92A2A;
+  --miragon-success: var(--cd-success);
+  --miragon-warning: var(--cd-warning);
+  --miragon-danger: var(--cd-danger);
+  /* Words that name a state: success and warning are too light for text here,
+     danger follows them so the three read with equal weight. */
+  --miragon-success-text: var(--miragon-text-primary);
+  --miragon-warning-text: var(--miragon-text-primary);
+  --miragon-danger-text: var(--miragon-text-primary);
   --miragon-diagram-text: initial;
   --miragon-diagram-paper: initial;
   --miragon-diagram-fill: initial;
   --miragon-diagram-blue: initial;
-  --miragon-shadow: var(--miragon-blue);
+  --miragon-shadow: var(--miragon-black);
   color-scheme: light;
 }
 
@@ -167,22 +169,22 @@ html.dark {
   --miragon-card-accent-blue: var(--miragon-green);
   --miragon-card-accent-blue-mid: var(--miragon-white);
   /* The `-hell` status values from tokens.json, AA on the dark surfaces. */
-  --miragon-success: var(--miragon-green);
-  --miragon-warning: #FFB000;
-  --miragon-danger: #FB6D73;
+  --miragon-success: var(--cd-success-hell);
+  --miragon-warning: var(--cd-warning-hell);
+  --miragon-danger: var(--cd-danger-hell);
+  --miragon-success-text: var(--miragon-success);
+  --miragon-warning-text: var(--miragon-warning);
+  --miragon-danger-text: var(--miragon-danger);
   --miragon-diagram-text: var(--miragon-white);
   --miragon-diagram-paper: color-mix(in srgb, var(--miragon-white) 5%, var(--miragon-black));
   --miragon-diagram-fill: color-mix(in srgb, var(--miragon-white) 12%, var(--miragon-black));
   --miragon-diagram-blue: var(--miragon-blue-bright);
-  /* Shadows are barely visible on dark (tokens.json `shadow`); the lighter
-     surface and its line carry the height, so they tint with the CI black. */
-  --miragon-shadow: var(--miragon-black);
   color-scheme: dark;
 }
 
 /*
  * Card rule (see the slides skill; use the <Card> component):
- * Cards are ALWAYS white (rounded-xl border + soft brand-blue shadow). When a
+ * Cards are ALWAYS white (rounded-xl border + soft shadow tinted with the CI black, tokens.json `shadow`). When a
  * set of cards needs an accent, colour the card's TITLE text only, using the
  * two sanctioned blues above. Never gradient or coloured card backgrounds.
  *
@@ -193,7 +195,7 @@ html.dark {
 /*
  * PDF / print export only. Slidev forces `media: "screen"` for the export
  * (so @media print never applies) but adds the class `print` on <html> and
- * wraps each captured slide in `.print-slide-container`. Soft blue-tinted
+ * wraps each captured slide in `.print-slide-container`. Soft
  * box-shadows on cards and layout panels (compare, goodbad, person, showcase,
  * …) and the large-blur text-shadow on the cover title all rasterise into hard
  * dark/lavender blocks behind the content. They are purely decorative (real

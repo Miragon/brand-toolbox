@@ -224,7 +224,7 @@ const rightVerdictClass = computed(() => (props.leftIsGood ? 'verdict-bad' : 've
   text-transform: uppercase;
 }
 .verdict-good .verdict-dot { background: var(--miragon-green); }
-.verdict-good .verdict-label { color: var(--miragon-success); }
+.verdict-good .verdict-label { color: var(--miragon-success-text); }
 .verdict-bad .verdict-dot { background: var(--miragon-text-muted); }
 .verdict-bad .verdict-label { color: var(--miragon-text-muted); }
 

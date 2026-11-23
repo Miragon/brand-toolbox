@@ -1,6 +1,6 @@
 {
   "$description": "The Miragon palette, machine-readable. This file is the ONLY place the validator keeps brand colour values, so the `brand-palette` and `brand-logo-asset` rules cannot drift apart from each other or grow a hand-maintained copy inside a rule. Mirrors the miragon-brand plugin, skill `corporate-design`, `assets/tokens.json`; where the two disagree, tokens.json wins and this file gets pulled back in line.",
-  "$source": "miragon-brand plugin -> skills/corporate-design/assets/tokens.json (color.*, functional.*, gradient.mesh-hero, logo.*)",
+  "$source": "miragon-brand plugin -> skills/corporate-design/assets/tokens.json (color.*, functional.*, logo.*)",
   "$rule": "brand-review rule B1 (exact palette colours) is a HARD fail, hence category `required` / default `error`.",
 
   "palette": [
@@ -11,23 +11,9 @@
     { "name": "weiss", "hex": "#FFFFFF", "role": "surface", "note": "Text on colour, surfaces." },
     { "name": "blau-link", "hex": "#2B50D4", "role": "interaction", "note": "Derived from blau: links and accent text on white, 6.56:1 (AA). Also tokens.json functional.info." },
     { "name": "blau-hell", "hex": "#6B8AFF", "role": "interaction-dark", "note": "Derived from blau: links and accents on dark ground." },
-    { "name": "success", "hex": "#0B7A55", "role": "status", "note": "STATE only, never a design colour." },
-    { "name": "warning", "hex": "#92610A", "role": "status", "note": "STATE only, never a design colour." },
-    { "name": "danger", "hex": "#C92A2A", "role": "status", "note": "STATE only, never a design colour." },
-    { "name": "warning-hell", "hex": "#FFB000", "role": "status-dark", "note": "tokens.json functional.warning-hell: the warning state on dark ground. STATE only." },
+    { "name": "warning", "hex": "#FFB000", "role": "status", "note": "tokens.json functional.warning and warning-hell. STATE only, never a design colour. Never text on a light ground (1.83:1). functional.success is gruen and follows the same rule." },
+    { "name": "danger", "hex": "#CD1839", "role": "status", "note": "tokens.json functional.danger. STATE only, never a design colour. AA as text on white." },
     { "name": "danger-hell", "hex": "#FB6D73", "role": "status-dark", "note": "tokens.json functional.danger-hell: the danger state on dark ground. STATE only." }
-  ],
-
-  "restricted": [
-    {
-      "name": "mesh-hero",
-      "hexes": ["#1A1A4E", "#0D0D2B", "#00C853"],
-      "files": [
-        "packages/toolkit/components/BrandMeshBackground.vue",
-        "packages/toolkit/styles/theme.css"
-      ],
-      "note": "tokens.json gradient.mesh-hero. Deliberately outside the base palette and valid ONLY for the animated hero shader and its CSS fallback tokens. #335DE5 and #00E676 are the other two stops and are already palette values."
-    }
   ],
 
   "scan": {
@@ -39,9 +25,10 @@
       "deck/**/*.excalidraw.svg"
     ],
     "exclude": [
-      "packages/toolkit/assets/*.svg"
+      "packages/toolkit/assets/*.svg",
+      "packages/toolkit/styles/cd-tokens.generated.css"
     ],
-    "$excludeReason": "The logo vectors are official artwork, not authored colour: they are checked byte-for-intent by the `brand-logo-asset` rule below instead."
+    "$excludeReason": "The logo vectors are official artwork, not authored colour: they are checked byte-for-intent by the `brand-logo-asset` rule below instead. `cd-tokens.generated.css` is the unchanged copy of the miragon-brand token export (listed in `.miragon/brand-assets.yaml`, checked with `sha256sum -c` in CI), so it is the palette itself rather than colour chosen in this repo."
   },
 
   "logo": {
