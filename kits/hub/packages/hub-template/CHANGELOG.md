@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.4](https://github.com/Miragon/brand-toolbox/compare/hub-template-v0.3.3...hub-template-v0.3.4) (2026-11-23)
+
+
+### Bug Fixes
+
+* **deps:** bump the npm group with 4 updates ([#313](https://github.com/Miragon/brand-toolbox/issues/313)) ([09a17a9](https://github.com/Miragon/brand-toolbox/commit/09a17a95ed4220f4cf88c1b90dd26240048da19e))
+* **hub-template:** show the sign-in error in the tokens.json status style ([#318](https://github.com/Miragon/brand-toolbox/issues/318)) ([0e7f14e](https://github.com/Miragon/brand-toolbox/commit/0e7f14e4eb17edb3e8a90bdc48d93888477078d4))
+
 ## [0.3.3](https://github.com/Miragon/brand-toolbox/compare/hub-template-v0.3.2...hub-template-v0.3.3) (2026-11-19)
 
 

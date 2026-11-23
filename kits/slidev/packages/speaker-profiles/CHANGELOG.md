@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.4](https://github.com/Miragon/brand-toolbox/compare/slidev-speaker-profiles-v0.3.3...slidev-speaker-profiles-v0.3.4) (2026-11-23)
+
+
+### Bug Fixes
+
+* **slidev-speaker-profiles:** use brand colours in the profile editor ([#319](https://github.com/Miragon/brand-toolbox/issues/319)) ([dc27fe2](https://github.com/Miragon/brand-toolbox/commit/dc27fe22f89b2dbdbb9ac3e1d51dac4f337d2b87))
+
 ## [0.3.3](https://github.com/Miragon/brand-toolbox/compare/slidev-speaker-profiles-v0.3.2...slidev-speaker-profiles-v0.3.3) (2026-11-19)
 
 
