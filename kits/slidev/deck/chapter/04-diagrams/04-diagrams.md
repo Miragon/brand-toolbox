@@ -272,10 +272,50 @@ height: 360px
   Without `scenarios` the slide stays a plain click-through token simulation.
   LIMIT: keep it full width. The start dialog and the gateway cards need the room,
   a split column leaves the start event under the simulation palette.
-  Transition: "The decisions inside it split the same way."
+  Transition: "Or skip the token and simply ask: what if?"
 -->
 
 Start from a **scenario**: the gateways evaluate their FEEL conditions, and missing data stops the token like an incident.
+
+---
+id: s-6786bab3
+layout: bpmn
+title: Ask what if, without a token
+eyebrow: 04 - Diagrams
+accent: blue
+diagram: /resources/04-diagrams/recruitment.zeebe.bpmn
+diagramAlt: "Recruitment with data: the screening score decides on an interview, the interview on an offer"
+mode: path
+scenarios: /resources/04-diagrams/recruitment.scenarios.json
+controls: [screeningScore, hire]
+side: right
+ratio: "1.7/1"
+height: 200px
+---
+
+<!--
+  bpmn PATH MODE: the what-if sibling of the data simulation. The gateways
+  decide at once for the given data and the path lights up; no token, no start
+  dialog, no simulation palette, so it fits a split column.
+  REQUIRED: diagram, mode: path.
+  OPTIONAL: engine (zeebe = FEEL, the default; camunda7 = JUEL), scenarios,
+  variables, steps, controls, side, ratio, height, diagramAlt, title, eyebrow, accent.
+  HOW TO USE: the .bpmn carries the gateway conditions; the scenarios JSON (the
+  same file the token mode uses) fills in the data and adds a dropdown.
+  `variables: { screeningScore: 84 }` sets the data without a file. Below the
+  diagram sits a control per variable the conditions read; `controls` lists the
+  ones to show (here the score and the interview result, not the fixed minimum)
+  or `none`. `steps: [{ screeningScore: 55 }, { hire: false }]` changes the data
+  click by click for a fixed story. A gateway that cannot decide turns red, with
+  its reason below the diagram. A scenario takes what it leaves out from the
+  other scenarios in the file.
+  `height` is the diagram's; the controls add a row below it.
+  Transition: "The decisions inside it split the same way."
+-->
+
+- Pick a **scenario** or move the score
+- Gateways decide by their FEEL conditions
+- No token, so it fits a **column**
 
 ---
 id: s-594d540d
