@@ -48,6 +48,8 @@ npm run verify   # full render + checklist per slide against the design rules
 
 `npm run verify:source` runs only the fast source-level guardrails (sanctioned layout, no raw HTML, diagrams light/transparent) with no browser — the same check CI runs on every PR.
 
+`npm run lint:bpmn` lints the reference deck's BPMN models with bpmnlint and Miragon's strict rules (`.bpmnlintrc`, `.bpmnlintrc.zeebe.json` for the Zeebe model); CI runs it on every PR too.
+
 ## Commits and PR titles
 
 PRs are **squash-merged**, so the PR title becomes the commit message on `main` and must be a valid [Conventional Commit](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `ci:`, `build:`, `test:`, `revert:`). The **PR Title** workflow enforces this. Scope changes to the package they touch (`feat(slidev-toolkit): …`, `fix(create-slidev-deck): …`) so they land in the right changelog. Scope skill changes `miragon-slidev` (`feat(miragon-slidev): …`) so they bump the plugin and land in [`kits/slidev/plugin/CHANGELOG.md`](kits/slidev/plugin/CHANGELOG.md).

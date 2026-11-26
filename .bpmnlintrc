@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "bpmnlint:recommended",
+    "plugin:@miragon/rules/strict"
+  ]
+}

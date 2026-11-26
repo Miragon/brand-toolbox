@@ -21,6 +21,7 @@
     "preverify:source": "npm run check:ids",
     "verify:source": "cd kits/slidev && SLIDEV_PROFILE=none slidev-validator",
     "shot": "node kits/slidev/scripts/shot.mjs",
+    "lint:bpmn": "bpmnlint kits/slidev/deck/chapter/04-diagrams/resources/recruitment.bpmn && bpmnlint -c .bpmnlintrc.zeebe.json kits/slidev/deck/chapter/04-diagrams/resources/recruitment.zeebe.bpmn",
     "check:release": "node shared/scripts/check-release-config.mjs"
   },
   "overrides": {
@@ -31,5 +32,10 @@
     "vitepress-plugin-mermaid": {
       "mermaid": "12.3.0"
     }
+  },
+  "devDependencies": {
+    "@miragon/bpmnlint-plugin-rules": "0.24.0",
+    "bpmnlint": "12.2.0",
+    "zeebe-bpmn-moddle": "2.0.0"
   }
 }
