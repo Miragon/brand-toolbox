@@ -8,10 +8,10 @@
         "minimumScore": 70
       },
       "taskResults": {
-        "Task_Screen": {
+        "userTask_screenApplication": {
           "score": 84
         },
-        "Task_Conduct": {
+        "userTask_conductInterview": {
           "decision": true
         }
       }
@@ -24,7 +24,7 @@
         "minimumScore": 70
       },
       "taskResults": {
-        "Task_Screen": {
+        "userTask_screenApplication": {
           "score": 55
         }
       }
@@ -37,10 +37,10 @@
         "minimumScore": 70
       },
       "taskResults": {
-        "Task_Screen": {
+        "userTask_screenApplication": {
           "score": 78
         },
-        "Task_Conduct": {
+        "userTask_conductInterview": {
           "decision": false
         }
       }
@@ -53,7 +53,7 @@
         "minimumScore": 70
       },
       "taskResults": {
-        "Task_Screen": {}
+        "userTask_screenApplication": {}
       }
     }
   ]

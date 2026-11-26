@@ -45,6 +45,11 @@ jobs:
       - name: Verify every slide of the reference deck has a stable id
         run: npm run check:ids
 
+      # The reference deck's BPMN models against bpmnlint and Miragon's strict rules
+      # (.bpmnlintrc, and .bpmnlintrc.zeebe.json for the Zeebe model).
+      - name: Lint the reference deck's BPMN models
+        run: npm run lint:bpmn
+
       - name: Build the reference deck
         run: npm run build
 

@@ -10,7 +10,8 @@ This repo holds everything other Miragon repositories install from the brand: on
 
 ## Rules for the whole repo
 
-- Root scripts work from the repo root: `npm run dev`, `npm run build`, `npm run verify:ci`, `npm run check:ids` (reference deck), `npm run check:release` (release setup of every package).
+- Root scripts work from the repo root: `npm run dev`, `npm run build`, `npm run verify:ci`, `npm run check:ids` (reference deck), `npm run lint:bpmn` (the reference deck's BPMN models against bpmnlint and Miragon's strict rules, `.bpmnlintrc` plus `.bpmnlintrc.zeebe.json` for the Zeebe model), `npm run check:release` (release setup of every package).
+- Change a BPMN model with the bpmn CLI (`npx -y @miragon/bpmn-cli`), not by hand; a renamed element is renamed in the `*.scenarios.json` next to it too (task results are keyed by element id).
 - A new package needs its release-please entry, `repository.url` / `repository.directory`, and a `beta_package` choice in the same PR; `npm run check:release` fails until they agree.
 - The repository was renamed from `Miragon/slidev-deck-template` and `Miragon/brand-packages`. Never create a repository with either name (see `.github/WORKFLOWS.md`).
 - Commit messages and PR titles are Conventional Commits, scoped to the package they touch.
