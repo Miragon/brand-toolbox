@@ -44,7 +44,7 @@ Set `layout:` per slide to one of the 17 archetypes:
 | `content-image` | Two columns: image on one side, prose/bullets on the other | ≤ 4 bullets, 1 visual |
 | `compare` | Side-by-side white panels; with `accent: mixed` the title colour and marker bar carry the distinction | ≤ 4 bullets per panel |
 | `goodbad` | "Which one is right, and why?": neutral panels + one-click reveal | keep panels short |
-| `bpmn` | A BPMN file with token simulation (needs `slidev-addon-diagram-js`) | 1 diagram, short caption |
+| `bpmn` | A BPMN file: static, token simulation, modeler or the path for given data (needs `slidev-addon-diagram-js`) | 1 diagram, short caption |
 | `dmn` | A DMN decision table (needs `slidev-addon-diagram-js`) | 1 table |
 | `mermaid` | A Mermaid fence framed as the slide's focal point | 1 diagram, short caption |
 | `excalidraw` | An `.excalidraw.svg` framed as the slide's focal point | 1 diagram, short caption |

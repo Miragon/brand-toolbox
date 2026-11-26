@@ -105,7 +105,7 @@ Each chapter file **begins with a `section` archetype slide** (the chapter divid
 | Prose or bullets next to an image | `content-image` |
 | Before vs. After (two coloured panels) | `compare` |
 | "Which one is right, and why?" with reveal | `goodbad` |
-| A BPMN process diagram with token playback | `bpmn` (needs `slidev-addon-diagram-js`) |
+| A BPMN process diagram with token playback, or the path it takes for given data | `bpmn` (needs `slidev-addon-diagram-js`; `mode: path` for the what-if) |
 | A DMN decision table (the rules behind a step) | `dmn` (needs `slidev-addon-diagram-js`) |
 | A Mermaid diagram framed as the focal point | `mermaid` (fence in the body, white card) |
 | An Excalidraw diagram framed as the focal point | `excalidraw` (`diagram:` path, white card) |

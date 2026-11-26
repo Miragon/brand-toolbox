@@ -2,7 +2,7 @@
 /**
  * bpmn — Slide centered on a BPMN diagram (STATIC world, no Mesh shader).
  *
- * Renders a .bpmn file from `slidev-addon-diagram-js` in one of three modes,
+ * Renders a .bpmn file from `slidev-addon-diagram-js` in one of four modes,
  * with an optional title/eyebrow header above and an optional caption below.
  * The diagram is the focal point.
  *
@@ -21,20 +21,32 @@
  *              decoration, so it needs a name (CI rule C4); the naming follows
  *              content-image.vue's `imageAlt`. Omitted, the diagram stays out
  *              of the accessibility tree instead of dictating raw SVG node ids.
- *   height   — CSS height for the BPMN canvas (default "380px")
+ *   height   — CSS height for the BPMN canvas (default "380px"); in path mode
+ *              the diagram's height, the controls sit below it
  *   mode     — render mode (default "token"):
  *                "static"  → <Bpmn> via BpmnStatic  (still image, no interaction)
  *                "token"   → <BpmnTokenSimulation>  (playable token flow, default)
  *                "modeler" → <BpmnModeler>          (editable modeler canvas)
- *   engine   — "camunda7" | "zeebe"  (modeler and token mode, optional)
+ *                "path"    → <BpmnPathSimulation>   (what-if: the path the gateways
+ *                            take for given data, controls below the diagram)
+ *   engine   — "camunda7" | "zeebe"  (modeler, token and path mode, optional)
  *              modeler: mounts an engine-specific properties panel in the
  *              modeler's fullscreen "Edit" view. Omit for a panel-less modeler.
  *              token: the expression language the data simulation evaluates
  *              (FEEL for zeebe, JUEL for camunda7); needs `scenarios`.
- *   scenarios — served URL path to a scenarios JSON next to the .bpmn
- *              (token mode, requires `engine`). Switches on the data
+ *              path: the same expression language; zeebe when omitted.
+ *   scenarios — served URL path to a scenarios JSON next to the .bpmn.
+ *              token mode (requires `engine`): switches on the data
  *              simulation: ▶ opens a start dialog prefilled from a scenario,
  *              gateways evaluate their conditions instead of waiting for a click.
+ *              path mode: the data to start from; several scenarios get a
+ *              dropdown in the controls.
+ *   variables — path mode: the variables to start from, e.g.
+ *              `{ screeningScore: 84 }` (a scenario overrides them)
+ *   steps    — path mode: variables applied one slide click after the other,
+ *              e.g. `[{ screeningScore: 55 }, { hire: false }]`
+ *   controls — path mode: "auto" (a control per variable the conditions read,
+ *              default), "none", or a list of variable names
  *   tokenSimulation — run the token simulation inside the modeler (modeler mode)
  *   transactionBoundaries — overlay Camunda 7 transaction boundaries in the
  *              modeler's fullscreen "Edit" view (modeler mode, requires
@@ -61,9 +73,12 @@ const props = withDefaults(
     diagram?: string
     diagramAlt?: string
     height?: string
-    mode?: 'static' | 'token' | 'modeler'
+    mode?: 'static' | 'token' | 'modeler' | 'path'
     engine?: 'camunda7' | 'zeebe'
     scenarios?: string
+    variables?: Record<string, unknown>
+    steps?: Record<string, unknown>[]
+    controls?: 'auto' | 'none' | string[]
     tokenSimulation?: boolean
     transactionBoundaries?: boolean
     side?: 'left' | 'right'
@@ -142,6 +157,17 @@ const diagramA11y = computed<Record<string, string>>(() => {
               width="100%"
               :height="height"
             />
+            <BpmnPathSimulation
+              v-else-if="mode === 'path'"
+              :bpmnFilePath="diagramSrc"
+              :engine="engine"
+              :scenariosFilePath="scenariosSrc"
+              :variables="variables"
+              :steps="steps"
+              :controls="controls"
+              width="100%"
+              :height="height"
+            />
             <BpmnTokenSimulation v-else :bpmnFilePath="diagramSrc" :engine="engine" :scenariosFilePath="scenariosSrc" width="100%" :height="height" />
           </template>
         </DiagramFrame>
@@ -153,7 +179,8 @@ const diagramA11y = computed<Record<string, string>>(() => {
 
       <SplitView v-else class="bpmn-split" :ratio="ratio" :reverse="side === 'right'" align="center">
         <template #visual>
-          <DiagramFrame class="bpmn-canvas bpmn-canvas--split" padding="compact" :height="height" v-bind="diagramA11y">
+          <!-- In path mode the controls sit below the diagram, so the frame grows with them. -->
+          <DiagramFrame class="bpmn-canvas bpmn-canvas--split" padding="compact" :height="mode === 'path' ? undefined : height" v-bind="diagramA11y">
             <template v-if="diagram">
               <BpmnStatic v-if="mode === 'static'" :bpmnFilePath="diagramSrc" width="100%" :height="height" />
               <BpmnModeler
@@ -162,6 +189,17 @@ const diagramA11y = computed<Record<string, string>>(() => {
                 :engine="engine"
                 :tokenSimulation="tokenSimulation"
                 :transactionBoundaries="transactionBoundaries"
+                width="100%"
+                :height="height"
+              />
+              <BpmnPathSimulation
+                v-else-if="mode === 'path'"
+                :bpmnFilePath="diagramSrc"
+                :engine="engine"
+                :scenariosFilePath="scenariosSrc"
+                :variables="variables"
+                :steps="steps"
+                :controls="controls"
                 width="100%"
                 :height="height"
               />

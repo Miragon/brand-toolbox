@@ -202,7 +202,7 @@ Two neutral panels `Model A` / `Model B`, then a one-click reveal of the verdict
 | **`::right::` slot** | none | Model B content |
 | **`::legend::` slot** | none | rule revealed with the verdicts |
 
-## bpmn: BPMN diagram (static / token simulation / modeler)
+## bpmn: BPMN diagram (static / token simulation / modeler / path)
 
 A `.bpmn` file rendered via `slidev-addon-diagram-js`. The diagram is the focal point.
 
@@ -212,9 +212,12 @@ A `.bpmn` file rendered via `slidev-addon-diagram-js`. The diagram is the focal 
 | `accent` | blue / green / mixed |
 | `diagram` (str) | the `.bpmn` in the chapter's `resources/`, e.g. `/resources/05-diagrams/x.bpmn` |
 | `height` (str) | canvas height (default `"380px"`) |
-| `mode` | `static` (still image) / `token` (playable token flow, **default**) / `modeler` (editable canvas) |
-| `engine` | `camunda7` / `zeebe`. `modeler` mode: mounts an engine-specific properties panel in the modeler's fullscreen "Edit" view (omit for a panel-less modeler). `token` mode: the expression language of the data simulation (FEEL for `zeebe`, JUEL for `camunda7`), only together with `scenarios`. |
-| `scenarios` (str) | `token` mode, requires `engine`: a scenarios JSON in the chapter's `resources/`, e.g. `/resources/04-diagrams/x.scenarios.json`. Switches on the **data simulation**: play on the start event opens a dialog prefilled from a scenario, gateways evaluate their conditions instead of waiting for a click, hovering one shows why, and missing data stops the token red like an incident. |
+| `mode` | `static` (still image) / `token` (playable token flow, **default**) / `modeler` (editable canvas) / `path` (what-if: the path the gateways take for given data, controls below the diagram) |
+| `engine` | `camunda7` / `zeebe`. `modeler` mode: mounts an engine-specific properties panel in the modeler's fullscreen "Edit" view (omit for a panel-less modeler). `token` mode: the expression language of the data simulation (FEEL for `zeebe`, JUEL for `camunda7`), only together with `scenarios`. `path` mode: the same expression language, `zeebe` when omitted. |
+| `scenarios` (str) | `path` mode: the data to start from, several scenarios get a dropdown. `token` mode, requires `engine`: a scenarios JSON in the chapter's `resources/`, e.g. `/resources/04-diagrams/x.scenarios.json`. Switches on the **data simulation**: play on the start event opens a dialog prefilled from a scenario, gateways evaluate their conditions instead of waiting for a click, hovering one shows why, and missing data stops the token red like an incident. |
+| `variables` (obj) | `path` mode: the variables to start from, e.g. `{ screeningScore: 84 }` (a scenario overrides them) |
+| `steps` (list) | `path` mode: variables applied one slide click after the other, e.g. `[{ screeningScore: 55 }, { hire: false }]`, for a fixed story that also exports to PDF |
+| `controls` | `path` mode: `auto` (a control per variable the conditions read, **default**), `none`, or a list of variable names |
 | `tokenSimulation` (bool) | run the token simulation inside the modeler (`modeler` mode, default `false`) |
 | `transactionBoundaries` (bool) | overlay Camunda 7 transaction boundaries in the modeler's fullscreen "Edit" view (`modeler` mode, requires `engine: camunda7`, default `false`) |
 | `side` | `left` / `right`, **split mode**: frame the diagram on that side, the slot becomes the content column opposite. Omit for full-width + caption below. |
@@ -225,7 +228,9 @@ A `.bpmn` file rendered via `slidev-addon-diagram-js`. The diagram is the focal 
 
 **Data simulation** (`mode: token` + `engine` + `scenarios`) runs the process with data, via [bpmn-js-data-simulation](https://github.com/emaarco/bpmn-js-data-simulation) (bundled in the addon). The `.bpmn` must carry the engine's io mappings and gateway conditions (`zeebe:ioMapping` + FEEL, or `camunda:inputOutput` + JUEL). The scenarios file holds named start variables and mocked task results keyed by element id (`{ "scenarios": [{ "id", "name", "description", "variables", "taskResults" }] }`, format in the upstream [scenarios doc](https://github.com/emaarco/bpmn-js-data-simulation/blob/main/docs/scenarios.md)). Demo: the "Let the data pick the path" slide in `deck/chapter/04-diagrams/` with `recruitment.zeebe.bpmn` + `recruitment.scenarios.json`.
 
-**Dependency:** `slidev-addon-diagram-js` (>= 2.2.0 for the data simulation) must be in `package.json` (pre-installed) **and** in deck/slides.md's top-level `addons:` block. Files go in the chapter's `resources/` folder.
+**Path simulation** (`mode: path`) asks what if without a token: the exclusive and inclusive gateways evaluate their conditions at once for the given data, the path is drawn in blue and everything off it fades. Below the diagram sit the controls (a scenario dropdown, a slider per number, a switch per boolean); `height` is the diagram's, the controls add a row below it. A gateway that cannot decide turns red with its reason under the diagram. Needs no simulation palette or start dialog, so unlike the data simulation it works in **split mode**. Demo: the "Ask what if, without a token" slide in `deck/chapter/04-diagrams/`.
+
+**Dependency:** `slidev-addon-diagram-js` (>= 2.2.0 for the data simulation, >= 2.11.0 for `mode: path`) must be in `package.json` (pre-installed) **and** in deck/slides.md's top-level `addons:` block. Files go in the chapter's `resources/` folder.
 
 ## dmn: DMN decision (table / live simulation / DRD / modeler)
 
