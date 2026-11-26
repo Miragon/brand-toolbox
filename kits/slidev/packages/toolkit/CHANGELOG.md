@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/Miragon/brand-toolbox/compare/v2.3.0...v2.4.0) (2026-11-26)
+
+
+### Features
+
+* **slidev-toolkit:** fix slider bounds in the bpmn layout's path mode with ranges ([#323](https://github.com/Miragon/brand-toolbox/issues/323)) ([9299c21](https://github.com/Miragon/brand-toolbox/commit/9299c21280918fc6ee7e67ab3a0870aa197836bc))
+
 ## [2.3.0](https://github.com/Miragon/brand-toolbox/compare/v2.2.0...v2.3.0) (2026-11-26)
 
 
