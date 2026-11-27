@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/Miragon/brand-toolbox/compare/v2.4.0...v2.5.0) (2026-11-27)
+
+
+### Features
+
+* **slidev-toolkit:** start the bpmn layout's path mode without data with scenario: none ([#325](https://github.com/Miragon/brand-toolbox/issues/325)) ([41a7220](https://github.com/Miragon/brand-toolbox/commit/41a72209c1950af407587ba06592838c39f0f3b1))
+
 ## [2.4.0](https://github.com/Miragon/brand-toolbox/compare/v2.3.0...v2.4.0) (2026-11-26)
 
 
