@@ -49,6 +49,8 @@
  *              default), "none", or a list of variable names
  *   ranges   — path mode: fixed slider bounds per variable, e.g.
  *              `{ screeningScore: { max: 100 } }` (min, max and step optional)
+ *   scenario — path mode: the scenario to start from, by id, or "none" to
+ *              start without data (unmarked, no controls) until one is picked
  *   tokenSimulation — run the token simulation inside the modeler (modeler mode)
  *   transactionBoundaries — overlay Camunda 7 transaction boundaries in the
  *              modeler's fullscreen "Edit" view (modeler mode, requires
@@ -82,6 +84,7 @@ const props = withDefaults(
     steps?: Record<string, unknown>[]
     controls?: 'auto' | 'none' | string[]
     ranges?: Record<string, { min?: number; max?: number; step?: number }>
+    scenario?: string
     tokenSimulation?: boolean
     transactionBoundaries?: boolean
     side?: 'left' | 'right'
@@ -169,6 +172,7 @@ const diagramA11y = computed<Record<string, string>>(() => {
               :steps="steps"
               :controls="controls"
               :ranges="ranges"
+              :scenario="scenario"
               width="100%"
               :height="height"
             />
@@ -205,6 +209,7 @@ const diagramA11y = computed<Record<string, string>>(() => {
                 :steps="steps"
                 :controls="controls"
                 :ranges="ranges"
+                :scenario="scenario"
                 width="100%"
                 :height="height"
               />
