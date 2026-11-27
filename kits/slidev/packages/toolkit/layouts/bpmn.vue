@@ -52,6 +52,10 @@
  *   scenario — path mode: the scenario to start from, by id, or "none" to
  *              start with empty controls: unmarked until a value is set
  *   tokenSimulation — run the token simulation inside the modeler (modeler mode)
+ *   pathSimulation — modeler mode: mark the path for the data with the path
+ *              mode's controls below the preview; in the fullscreen "Edit" view
+ *              the path follows every edit. Takes scenarios, variables,
+ *              controls, ranges and scenario like path mode.
  *   transactionBoundaries — overlay Camunda 7 transaction boundaries in the
  *              modeler's fullscreen "Edit" view (modeler mode, requires
  *              engine="camunda7"; ignored otherwise)
@@ -86,6 +90,7 @@ const props = withDefaults(
     ranges?: Record<string, { min?: number; max?: number; step?: number }>
     scenario?: string
     tokenSimulation?: boolean
+    pathSimulation?: boolean
     transactionBoundaries?: boolean
     side?: 'left' | 'right'
     ratio?: string
@@ -96,6 +101,7 @@ const props = withDefaults(
     height: '380px',
     mode: 'token',
     tokenSimulation: false,
+    pathSimulation: false,
     transactionBoundaries: false,
     ratio: '1/1',
   },
@@ -118,6 +124,8 @@ function withBase(path?: string) {
 }
 const diagramSrc = computed(() => withBase(props.diagram))
 const scenariosSrc = computed(() => withBase(props.scenarios))
+// Path mode and a modeler with pathSimulation put their controls below the diagram.
+const hasPathControls = computed(() => props.mode === 'path' || (props.mode === 'modeler' && props.pathSimulation))
 
 // Barrierefreier Name für den Diagramm-Container (CI-Regel C4).
 //   mit `diagramAlt`  → der Container wird ein benanntes Objekt.
@@ -160,6 +168,12 @@ const diagramA11y = computed<Record<string, string>>(() => {
               :engine="engine"
               :tokenSimulation="tokenSimulation"
               :transactionBoundaries="transactionBoundaries"
+              :pathSimulation="pathSimulation"
+              :scenariosFilePath="scenariosSrc"
+              :variables="variables"
+              :controls="controls"
+              :ranges="ranges"
+              :scenario="scenario"
               width="100%"
               :height="height"
             />
@@ -187,8 +201,8 @@ const diagramA11y = computed<Record<string, string>>(() => {
 
       <SplitView v-else class="bpmn-split" :ratio="ratio" :reverse="side === 'right'" align="center">
         <template #visual>
-          <!-- In path mode the controls sit below the diagram, so the frame grows with them. -->
-          <DiagramFrame class="bpmn-canvas bpmn-canvas--split" padding="compact" :height="mode === 'path' ? undefined : height" v-bind="diagramA11y">
+          <!-- With path controls below the diagram the frame grows with them. -->
+          <DiagramFrame class="bpmn-canvas bpmn-canvas--split" padding="compact" :height="hasPathControls ? undefined : height" v-bind="diagramA11y">
             <template v-if="diagram">
               <BpmnStatic v-if="mode === 'static'" :bpmnFilePath="diagramSrc" width="100%" :height="height" />
               <BpmnModeler
@@ -197,6 +211,12 @@ const diagramA11y = computed<Record<string, string>>(() => {
                 :engine="engine"
                 :tokenSimulation="tokenSimulation"
                 :transactionBoundaries="transactionBoundaries"
+                :pathSimulation="pathSimulation"
+                :scenariosFilePath="scenariosSrc"
+                :variables="variables"
+                :controls="controls"
+                :ranges="ranges"
+                :scenario="scenario"
                 width="100%"
                 :height="height"
               />
