@@ -50,7 +50,7 @@
  *   ranges   — path mode: fixed slider bounds per variable, e.g.
  *              `{ screeningScore: { max: 100 } }` (min, max and step optional)
  *   scenario — path mode: the scenario to start from, by id, or "none" to
- *              start without data (unmarked, no controls) until one is picked
+ *              start with empty controls: unmarked until a value is set
  *   tokenSimulation — run the token simulation inside the modeler (modeler mode)
  *   transactionBoundaries — overlay Camunda 7 transaction boundaries in the
  *              modeler's fullscreen "Edit" view (modeler mode, requires
