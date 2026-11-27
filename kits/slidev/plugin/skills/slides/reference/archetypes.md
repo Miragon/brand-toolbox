@@ -219,6 +219,7 @@ A `.bpmn` file rendered via `slidev-addon-diagram-js`. The diagram is the focal 
 | `steps` (list) | `path` mode: variables applied one slide click after the other, e.g. `[{ screeningScore: 55 }, { hire: false }]`, for a fixed story that also exports to PDF |
 | `controls` | `path` mode: `auto` (a control per variable the conditions read, **default**), `none`, or a list of variable names |
 | `ranges` (obj) | `path` mode: fixed slider bounds per variable, e.g. `{ screeningScore: { max: 100 } }` (`min`, `max`, `step` each optional; a missing `step` divides the range into 100). Without it a slider spans up to twice the largest number the variable is compared with. |
+| `scenario` (str) | `path` mode, with `scenarios`: the scenario to start from, by id. `none` starts without data: the diagram unmarked, no controls, the dropdown on "No data" until a scenario is picked. For a slide that explains the model first and walks through the cases after. Omit to start from the first scenario. |
 | `tokenSimulation` (bool) | run the token simulation inside the modeler (`modeler` mode, default `false`) |
 | `transactionBoundaries` (bool) | overlay Camunda 7 transaction boundaries in the modeler's fullscreen "Edit" view (`modeler` mode, requires `engine: camunda7`, default `false`) |
 | `side` | `left` / `right`, **split mode**: frame the diagram on that side, the slot becomes the content column opposite. Omit for full-width + caption below. |
@@ -231,7 +232,7 @@ A `.bpmn` file rendered via `slidev-addon-diagram-js`. The diagram is the focal 
 
 **Path simulation** (`mode: path`) asks what if without a token: the exclusive and inclusive gateways evaluate their conditions at once for the given data, the path is drawn in blue and everything off it fades. Below the diagram sit the controls (a scenario dropdown, a slider per number, a switch per boolean); `height` is the diagram's, the controls add a row below it. A gateway that cannot decide turns red with its reason under the diagram. Needs no simulation palette or start dialog, so unlike the data simulation it works in **split mode**. Demo: the "Ask what if, without a token" slide in `deck/chapter/04-diagrams/`.
 
-**Dependency:** `slidev-addon-diagram-js` (>= 2.2.0 for the data simulation, >= 2.11.0 for `mode: path`, >= 2.12.0 for `ranges` and for multi-instance activities and conditional flows on activities in the data simulation) must be in `package.json` (pre-installed) **and** in deck/slides.md's top-level `addons:` block. Files go in the chapter's `resources/` folder.
+**Dependency:** `slidev-addon-diagram-js` (>= 2.2.0 for the data simulation, >= 2.11.0 for `mode: path`, >= 2.12.0 for `ranges` and for multi-instance activities and conditional flows on activities in the data simulation, >= 2.13.0 for `scenario`) must be in `package.json` (pre-installed) **and** in deck/slides.md's top-level `addons:` block. Files go in the chapter's `resources/` folder.
 
 ## dmn: DMN decision (table / live simulation / DRD / modeler)
 

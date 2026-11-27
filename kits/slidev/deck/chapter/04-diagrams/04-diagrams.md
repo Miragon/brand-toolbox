@@ -301,14 +301,15 @@ height: 200px
   dialog, no simulation palette, so it fits a split column.
   REQUIRED: diagram, mode: path.
   OPTIONAL: engine (zeebe = FEEL, the default; camunda7 = JUEL), scenarios,
-  variables, steps, controls, ranges, side, ratio, height, diagramAlt, title, eyebrow, accent.
+  variables, steps, controls, ranges, scenario, side, ratio, height, diagramAlt, title, eyebrow, accent.
   HOW TO USE: the .bpmn carries the gateway conditions; the scenarios JSON (the
   same file the token mode uses) fills in the data and adds a dropdown.
   `variables: { screeningScore: 84 }` sets the data without a file. Below the
   diagram sits a control per variable the conditions read; `controls` lists the
   ones to show (here the score and the interview result, not the fixed minimum)
   or `none`. `ranges` fixes a slider's bounds: here the score runs to 100
-  instead of twice the minimum it is compared with. `steps: [{ screeningScore: 55 }, { hire: false }]` changes the data
+  instead of twice the minimum it is compared with. `scenario: none` opens the
+  slide on "No data" (unmarked, no controls) to explain the model before the cases. `steps: [{ screeningScore: 55 }, { hire: false }]` changes the data
   click by click for a fixed story. A gateway that cannot decide turns red, with
   its reason below the diagram. A scenario takes what it leaves out from the
   other scenarios in the file.
