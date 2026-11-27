@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.1](https://github.com/Miragon/brand-toolbox/compare/miragon-slidev-plugin-v2.5.0...miragon-slidev-plugin-v2.5.1) (2026-11-27)
+
+
+### Bug Fixes
+
+* **slidev-toolkit:** describe the path mode's scenario: none as empty controls and bump the deck to slidev-addon-diagram-js 2.14.1 ([#327](https://github.com/Miragon/brand-toolbox/issues/327)) ([322f409](https://github.com/Miragon/brand-toolbox/commit/322f409be4e14b89d0fede09f2a008a3bc2fab83))
+
 ## [2.5.0](https://github.com/Miragon/brand-toolbox/compare/miragon-slidev-plugin-v2.4.0...miragon-slidev-plugin-v2.5.0) (2026-11-27)
 
 
