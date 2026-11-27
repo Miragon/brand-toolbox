@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/Miragon/brand-toolbox/compare/v2.5.1...v2.6.0) (2026-11-27)
+
+
+### Features
+
+* **slidev-toolkit:** add pathSimulation to the bpmn layout's modeler mode ([#329](https://github.com/Miragon/brand-toolbox/issues/329)) ([784c67f](https://github.com/Miragon/brand-toolbox/commit/784c67f75718dca34f422b15aef8eb6753bf2a95))
+
 ## [2.5.1](https://github.com/Miragon/brand-toolbox/compare/v2.5.0...v2.5.1) (2026-11-27)
 
 
