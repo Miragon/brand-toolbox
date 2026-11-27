@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.7.16](https://github.com/Miragon/brand-toolbox/compare/create-slidev-deck-v1.7.15...create-slidev-deck-v1.7.16) (2026-11-27)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @miragon/slidev-toolkit bumped from 2.4.0 to 2.5.0
+
 ## [1.7.15](https://github.com/Miragon/brand-toolbox/compare/create-slidev-deck-v1.7.14...create-slidev-deck-v1.7.15) (2026-11-26)
 
 

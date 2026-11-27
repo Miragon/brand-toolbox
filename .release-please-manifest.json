@@ -1,9 +1,9 @@
 {
-  "kits/slidev/packages/toolkit": "2.4.0",
-  "kits/slidev/packages/create-deck": "1.7.15",
+  "kits/slidev/packages/toolkit": "2.5.0",
+  "kits/slidev/packages/create-deck": "1.7.16",
   "kits/slidev/packages/validator": "0.9.0",
   "kits/slidev/packages/speaker-profiles": "0.3.4",
-  "kits/slidev/plugin": "2.4.0",
+  "kits/slidev/plugin": "2.5.0",
   "kits/hub/packages/hub-template": "0.3.4",
   "kits/docs/packages/docs-starter": "1.1.0"
 }
